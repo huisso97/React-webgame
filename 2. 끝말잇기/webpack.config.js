@@ -31,6 +31,7 @@ module.exports = {
     path: path.join(__dirname, "dist"),
     // 출력파일명
     filename: "app.js",
+    publicPath: "/dist",
   },
   devServer: {
     // 결과물을 dist 에 저장해주고, 소스코드에 변경사항이 있을 때마다 결과물에 수정 내역을 반영해준다(hot reloading)
