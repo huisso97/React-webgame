@@ -87,4 +87,42 @@ useEffect의 dependency에는 해당 비동기 state를 넣고, state가 바뀌�
 
 ## 테이블 최적화하기
 
-props로 넘기는 값, 함수들은 useCallback, useMemo로 감싸는 것이 좋다. 왜냐하면, 감싸지 않으면 부모 컴포넌트가 렌더링될때 자식 컴포넌트도 같이 렌더링되기 때문이다.
+### useMemo, useCallback
+
+useMemo : 값을 기억
+
+useCallback : 함수를 기억
+
+props로 넘기는 값, 함수들은 useCallback, useMemo로 감싸는 것이 좋다. 왜냐하면, 감싸지 않으면 부모 컴포넌트가 렌더링될때, 해당 값을 재생성해서 props로 넘기기 때문에 자식 컴포넌트도 같이 렌더링되기 때문이다.
+
+useMemo의 경우, 컴포넌트도 기억할 수 있다.
+
+의존성 배열에 있는 값이 바뀔 때에만 새로 렌더링 되고, 그 외에는 렌더링 되지 않는다.
+
+만약 React.memo가 잘 안먹히면, useMemo로 컴포넌트 자체를 기억한다.
+
+```javascript
+return (
+  <tr>
+    {Array(rowData.length)
+      .fill()
+      .map((td, i) =>
+        // useMemo로 컴포넌트를 기억한다.
+        useMemo(
+          () => (
+            <Td key={i} dispatch={dispatch} rowIndex={rowIndex}>
+              {' '}
+            </Td>
+          ),
+          [rowData[i]]
+        )
+      )}
+  </tr>
+);
+```
+
+### React.memo
+
+부모 컴포넌트에서 자식 컴포넌트를 map 함수등으로 렌더링하고 있다면, React.memo를 적용하여 최적화한다.
+
+props만 안바뀌면 리렌더링이 안된다.
