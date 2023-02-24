@@ -1,7 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-import RSP from "./RSP.jsx";
+import TicTacToe from './TicTacToe.jsx';
 
-// React 18 버전 방식
-ReactDOM.createRoot(document.querySelector("#root")).render(<RSP />);
+ReactDOM.createRoot(document.querySelector('#root')).render(<TicTacToe />);
